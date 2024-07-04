@@ -5,7 +5,7 @@ const nameForm = document.getElementById('name-form');
 const playerInfo = document.getElementById('player-info');
 const playerNameDisplay = document.getElementById('player-name');
 
-const socket = new WebSocket('ws://your-service-name.onrender.com'); // Update to your Render service URL
+const socket = new WebSocket('wss://your-service-name.onrender.com'); // Use wss (secure WebSocket) for Render
 
 let userName = '';
 
