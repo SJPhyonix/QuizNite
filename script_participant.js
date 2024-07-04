@@ -12,6 +12,11 @@ let userName = '';
 
 socket.addEventListener('open', () => {
     console.log('Participant: Connected to the server');
+    setInterval(() => {
+        if (userName) {
+            socket.send(JSON.stringify({ type: 'ping', user: userName }));
+        }
+    }, 5000); // Send ping every 5 seconds
 });
 
 joinButton.addEventListener('click', () => {
