@@ -5,7 +5,7 @@ const nameForm = document.getElementById('name-form');
 const playerInfo = document.getElementById('player-info');
 const playerNameDisplay = document.getElementById('player-name');
 
-const socket = new WebSocket('wss://quiznite.onrender.com'); // Render service URL
+const socket = new WebSocket('wss://quiznite.onrender.com'); // Ensure this URL is correct
 
 let userName = '';
 
