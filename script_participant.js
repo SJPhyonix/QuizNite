@@ -5,6 +5,7 @@ const nameForm = document.getElementById('name-form');
 const playerInfo = document.getElementById('player-info');
 const playerNameDisplay = document.getElementById('player-name');
 const buzzedMessage = document.getElementById('buzzed-message');
+const questionDiv = document.getElementById('question');
 
 const socket = new WebSocket('wss://quiznite.onrender.com'); // Ensure this URL is correct
 
@@ -43,5 +44,7 @@ socket.addEventListener('message', (event) => {
     if (data.type === 'reset') {
         buzzedMessage.style.display = 'none';
         buzzerButton.disabled = false;
+    } else if (data.type === 'question') {
+        questionDiv.textContent = data.question;
     }
 });
