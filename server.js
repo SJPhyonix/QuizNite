@@ -21,10 +21,12 @@ server.on('connection', socket => {
             broadcast(JSON.stringify({ type: 'reset' }));
         } else if (data.type === 'join') {
             players[data.user] = { socket, lastPing: Date.now() };
+            console.log(`Server: ${data.user} joined`);
             broadcastPlayers();
         } else if (data.type === 'ping') {
             if (players[data.user]) {
                 players[data.user].lastPing = Date.now();
+                console.log(`Server: ${data.user} pinged at ${players[data.user].lastPing}`);
             }
         }
     });
@@ -33,11 +35,11 @@ server.on('connection', socket => {
         for (let user in players) {
             if (players[user].socket === socket) {
                 delete players[user];
+                console.log(`Server: ${user} disconnected`);
                 broadcastPlayers();
                 break;
             }
         }
-        console.log('Server: Client disconnected');
     });
 });
 
@@ -47,6 +49,7 @@ setInterval(() => {
     for (let user in players) {
         if (now - players[user].lastPing > 10000) { // 10 seconds timeout
             delete players[user];
+            console.log(`Server: ${user} removed due to inactivity`);
             changed = true;
         }
     }
@@ -57,6 +60,7 @@ setInterval(() => {
 
 function broadcastPlayers() {
     const playerList = Object.keys(players);
+    console.log('Server: Broadcasting players', playerList);
     broadcast(JSON.stringify({ type: 'updatePlayers', players: playerList }));
 }
 
