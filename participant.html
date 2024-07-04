@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Quiz</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="quiz-container">
+        <h1>Live Quiz</h1>
+        <div id="name-form">
+            <input type="text" id="name-input" placeholder="Enter your name">
+            <button id="join">Join</button>
+        </div>
+        <div id="player-info" style="display:none;">
+            <h2 id="player-name"></h2>
+            <div id="buzzer-container">
+                <button id="buzzer" disabled>Buzz</button>
+            </div>
+        </div>
+    </div>
+    <script src="script_participant.js"></script>
+</body>
+</html>

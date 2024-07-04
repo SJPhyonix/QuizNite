@@ -1,0 +1,100 @@
+/* Import the medieval-themed font */
+@import url('https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap');
+
+body {
+    font-family: 'MedievalSharp', cursive; /* Medieval-themed font */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: url('images/wooden-desk.jpg'); /* Update with the path to your wooden desk image */
+    background-size: cover;
+    background-position: center;
+    margin: 0;
+    color: #ffffff; /* Set text color to white for better contrast */
+}
+
+#quiz-container {
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.7); /* Slightly transparent background for text readability */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+#buzzer, #reset {
+    padding: 10px 20px;
+    font-size: 1.5em;
+    margin-top: 20px;
+    background-color: #c0a16b; /* A color reminiscent of old parchment or leather */
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition: transform 0.1s;
+}
+
+#buzzer:hover, #reset:hover {
+    transform: scale(1.1);
+}
+
+#result {
+    margin-top: 20px;
+    font-size: 1.2em;
+}
+
+#players-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+#players-list li {
+    background-color: rgba(255, 255, 255, 0.2); /* Slightly transparent background for players list items */
+    margin: 5px 0;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+/* Buzzer button specific styling */
+#buzzer {
+    background-image: url('images/bell-image.png'); /* Update with the path to your bell image */
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    padding: 20px;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.1s;
+}
+
+#buzzer:hover {
+    transform: scale(1.1);
+}
+
+/* Input and button styling for name form */
+#name-form input {
+    padding: 10px;
+    font-size: 1.2em;
+    border-radius: 5px;
+    border: 2px solid #c0a16b;
+    margin-right: 10px;
+    width: 200px;
+}
+
+#name-form button {
+    padding: 10px 20px;
+    font-size: 1.2em;
+    background-color: #c0a16b;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition: transform 0.1s;
+}
+
+#name-form button:hover {
+    transform: scale(1.1);
+}
