@@ -43,12 +43,16 @@ server.on('connection', socket => {
 
 setInterval(() => {
     const now = Date.now();
+    let changed = false;
     for (let user in players) {
         if (now - players[user].lastPing > 10000) { // 10 seconds timeout
             delete players[user];
+            changed = true;
         }
     }
-    broadcastPlayers();
+    if (changed) {
+        broadcastPlayers();
+    }
 }, 5000);
 
 function broadcastPlayers() {
