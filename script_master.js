@@ -14,6 +14,7 @@ socket.addEventListener('message', (event) => {
     if (data.type === 'buzz') {
         resultDiv.textContent = `${data.user} buzzed in first!`;
     } else if (data.type === 'updatePlayers') {
+        console.log('Master: Updating players list', data.players); // Debugging statement
         updatePlayersList(data.players);
     }
 });
