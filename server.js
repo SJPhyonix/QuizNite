@@ -1,10 +1,10 @@
 const WebSocket = require('ws');
-const port = process.env.PORT || 3000; // Use the PORT environment variable or default to 3000
+const port = process.env.PORT || 3000;
 
 const server = new WebSocket.Server({ port });
 
 let buzzedFirst = false;
-let players = [];
+let players = {};
 
 server.on('connection', socket => {
     console.log('Server: Client connected');
@@ -20,16 +20,41 @@ server.on('connection', socket => {
             buzzedFirst = false;
             broadcast(JSON.stringify({ type: 'reset' }));
         } else if (data.type === 'join') {
-            players.push(data.user);
-            console.log('Server: Players list updated', players); // Debugging statement
-            broadcast(JSON.stringify({ type: 'updatePlayers', players }));
+            players[data.user] = { socket, lastPing: Date.now() };
+            broadcastPlayers();
+        } else if (data.type === 'ping') {
+            if (players[data.user]) {
+                players[data.user].lastPing = Date.now();
+            }
         }
     });
 
     socket.on('close', () => {
+        for (let user in players) {
+            if (players[user].socket === socket) {
+                delete players[user];
+                broadcastPlayers();
+                break;
+            }
+        }
         console.log('Server: Client disconnected');
     });
 });
+
+setInterval(() => {
+    const now = Date.now();
+    for (let user in players) {
+        if (now - players[user].lastPing > 10000) { // 10 seconds timeout
+            delete players[user];
+        }
+    }
+    broadcastPlayers();
+}, 5000);
+
+function broadcastPlayers() {
+    const playerList = Object.keys(players);
+    broadcast(JSON.stringify({ type: 'updatePlayers', players: playerList }));
+}
 
 function broadcast(data) {
     server.clients.forEach(client => {
@@ -37,7 +62,7 @@ function broadcast(data) {
             client.send(data);
         }
     });
-    console.log('Server: Broadcast message', data); // Debugging statement
+    console.log('Server: Broadcast message', data);
 }
 
 console.log(`Server: Running on port ${port}`);
