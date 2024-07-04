@@ -1,6 +1,8 @@
 const resultDiv = document.getElementById('result');
 const resetButton = document.getElementById('reset');
 const playersList = document.getElementById('players-list');
+const questionInput = document.getElementById('question-input');
+const sendQuestionButton = document.getElementById('send-question');
 
 const socket = new WebSocket('wss://quiznite.onrender.com'); // Ensure this URL is correct
 
@@ -14,7 +16,7 @@ socket.addEventListener('message', (event) => {
     if (data.type === 'buzz') {
         resultDiv.textContent = `${data.user} buzzed in first!`;
     } else if (data.type === 'updatePlayers') {
-        console.log('Master: Updating players list', data.players); // Debugging statement
+        console.log('Master: Updating players list', data.players);
         updatePlayersList(data.players);
     }
 });
@@ -22,6 +24,13 @@ socket.addEventListener('message', (event) => {
 resetButton.addEventListener('click', () => {
     socket.send(JSON.stringify({ type: 'reset' }));
     resultDiv.textContent = 'Waiting for buzzes...';
+});
+
+sendQuestionButton.addEventListener('click', () => {
+    const question = questionInput.value;
+    socket.send(JSON.stringify({ type: 'question', question }));
+    questionInput.value = '';
+    console.log('Master: Sent question', question);
 });
 
 function updatePlayersList(players) {
