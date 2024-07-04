@@ -4,6 +4,7 @@ const buzzerButton = document.getElementById('buzzer');
 const nameForm = document.getElementById('name-form');
 const playerInfo = document.getElementById('player-info');
 const playerNameDisplay = document.getElementById('player-name');
+const buzzedMessage = document.getElementById('buzzed-message');
 
 const socket = new WebSocket('wss://quiznite.onrender.com'); // Ensure this URL is correct
 
@@ -26,12 +27,15 @@ joinButton.addEventListener('click', () => {
 
 buzzerButton.addEventListener('click', () => {
     socket.send(JSON.stringify({ type: 'buzz', user: userName }));
+    buzzedMessage.style.display = 'block';
+    buzzerButton.disabled = true;
 });
 
 socket.addEventListener('message', (event) => {
     const data = JSON.parse(event.data);
     console.log('Participant: Received message', data);
     if (data.type === 'reset') {
+        buzzedMessage.style.display = 'none';
         buzzerButton.disabled = false;
     }
 });
