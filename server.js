@@ -21,6 +21,7 @@ server.on('connection', socket => {
             broadcast(JSON.stringify({ type: 'reset' }));
         } else if (data.type === 'join') {
             players.push(data.user);
+            console.log('Server: Players list updated', players); // Debugging statement
             broadcast(JSON.stringify({ type: 'updatePlayers', players }));
         }
     });
@@ -36,7 +37,7 @@ function broadcast(data) {
             client.send(data);
         }
     });
-    console.log('Server: Broadcast message', data);
+    console.log('Server: Broadcast message', data); // Debugging statement
 }
 
 console.log(`Server: Running on port ${port}`);
