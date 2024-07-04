@@ -15,6 +15,7 @@ socket.addEventListener('open', () => {
     setInterval(() => {
         if (userName) {
             socket.send(JSON.stringify({ type: 'ping', user: userName }));
+            console.log(`Participant: Sent ping for ${userName}`);
         }
     }, 5000); // Send ping every 5 seconds
 });
@@ -23,7 +24,7 @@ joinButton.addEventListener('click', () => {
     userName = nameInput.value;
     if (userName) {
         socket.send(JSON.stringify({ type: 'join', user: userName }));
-        console.log('Participant: Sent join message', userName); // Debugging statement
+        console.log('Participant: Sent join message', userName);
         nameForm.style.display = 'none';
         playerNameDisplay.textContent = `Player: ${userName}`;
         playerInfo.style.display = 'block';
