@@ -2,7 +2,7 @@ const resultDiv = document.getElementById('result');
 const resetButton = document.getElementById('reset');
 const playersList = document.getElementById('players-list');
 
-const socket = new WebSocket('ws://your-service-name.onrender.com'); // Update to your Render service URL
+const socket = new WebSocket('wss://your-service-name.onrender.com'); // Use wss (secure WebSocket) for Render
 
 socket.addEventListener('open', () => {
     console.log('Master: Connected to the server');
