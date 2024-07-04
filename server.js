@@ -28,6 +28,8 @@ server.on('connection', socket => {
                 players[data.user].lastPing = Date.now();
                 console.log(`Server: ${data.user} pinged at ${players[data.user].lastPing}`);
             }
+        } else if (data.type === 'question') {
+            broadcast(JSON.stringify({ type: 'question', question: data.question }));
         }
     });
 
