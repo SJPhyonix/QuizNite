@@ -2,7 +2,7 @@ const resultDiv = document.getElementById('result');
 const resetButton = document.getElementById('reset');
 const playersList = document.getElementById('players-list');
 
-const socket = new WebSocket('wss://quiznite.onrender.com'); // Render service URL
+const socket = new WebSocket('wss://quiznite.onrender.com'); // Ensure this URL is correct
 
 socket.addEventListener('open', () => {
     console.log('Master: Connected to the server');
