@@ -5,7 +5,7 @@ const nameForm = document.getElementById('name-form');
 const playerInfo = document.getElementById('player-info');
 const playerNameDisplay = document.getElementById('player-name');
 
-const socket = new WebSocket('ws://81.107.83.168:3000'); // Update to your public IP and port
+const socket = new WebSocket('ws://your-service-name.onrender.com'); // Update to your Render service URL
 
 let userName = '';
 
@@ -31,8 +31,6 @@ socket.addEventListener('message', (event) => {
     const data = JSON.parse(event.data);
     console.log('Participant: Received message', data);
     if (data.type === 'reset') {
-        buzzerButton.disabled = true;
-    } else if (data.type === 'unlock') {
         buzzerButton.disabled = false;
     }
 });
