@@ -17,6 +17,7 @@ joinButton.addEventListener('click', () => {
     userName = nameInput.value;
     if (userName) {
         socket.send(JSON.stringify({ type: 'join', user: userName }));
+        console.log('Participant: Sent join message', userName); // Debugging statement
         nameForm.style.display = 'none';
         playerNameDisplay.textContent = `Player: ${userName}`;
         playerInfo.style.display = 'block';
