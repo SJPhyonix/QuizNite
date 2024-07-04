@@ -1,9 +1,8 @@
 const resultDiv = document.getElementById('result');
 const resetButton = document.getElementById('reset');
-const unlockButton = document.getElementById('unlock');
 const playersList = document.getElementById('players-list');
 
-const socket = new WebSocket('ws://81.107.83.168:3000'); // Update to your public IP and port
+const socket = new WebSocket('ws://your-service-name.onrender.com'); // Update to your Render service URL
 
 socket.addEventListener('open', () => {
     console.log('Master: Connected to the server');
@@ -22,10 +21,6 @@ socket.addEventListener('message', (event) => {
 resetButton.addEventListener('click', () => {
     socket.send(JSON.stringify({ type: 'reset' }));
     resultDiv.textContent = 'Waiting for buzzes...';
-});
-
-unlockButton.addEventListener('click', () => {
-    socket.send(JSON.stringify({ type: 'unlock' }));
 });
 
 function updatePlayersList(players) {
