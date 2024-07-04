@@ -1,5 +1,7 @@
 const WebSocket = require('ws');
-const server = new WebSocket.Server({ port: 3000 });
+const port = process.env.PORT || 3000; // Use the PORT environment variable or default to 3000
+
+const server = new WebSocket.Server({ port });
 
 let buzzedFirst = false;
 let players = [];
@@ -20,8 +22,6 @@ server.on('connection', socket => {
         } else if (data.type === 'join') {
             players.push(data.user);
             broadcast(JSON.stringify({ type: 'updatePlayers', players }));
-        } else if (data.type === 'unlock') {
-            broadcast(JSON.stringify({ type: 'unlock' }));
         }
     });
 
@@ -39,4 +39,4 @@ function broadcast(data) {
     console.log('Server: Broadcast message', data);
 }
 
-console.log('Server: Running on ws://192.168.0.67:3000');
+console.log(`Server: Running on port ${port}`);
