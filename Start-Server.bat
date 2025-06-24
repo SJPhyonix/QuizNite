@@ -1,4 +1,9 @@
 @echo off
+rem -------------------------------------------------------
+rem  Launch the local QuizNite servers
+rem  - Node.js WebSocket server on port 3000
+rem  - Python HTTP server on port 8000
+rem -------------------------------------------------------
 echo Starting the WebSocket server...
 
 :: Check if node_modules folder exists
@@ -27,10 +32,11 @@ start cmd /k "python -m http.server 8000"
 echo.
 echo Server is running. Open the following URLs in your browser:
 echo.
-echo Master view: http://192.168.0.67:8000/master.html
-echo Participant view: http://192.168.0.67:8000/participant.html
+echo Master view: http://localhost:8000/master.html
+echo Participant view: http://localhost:8000/participant.html
 echo.
-echo To stop the servers, run stop-quiz-server.bat.
+echo Clients connect to the WebSocket server at ws://localhost:3000
+echo Run stop-quiz-server.bat to stop both servers.
 echo.
 echo Press any key to close this window...
 pause >nul

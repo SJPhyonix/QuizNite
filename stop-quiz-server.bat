@@ -1,34 +1,14 @@
-const joinButton = document.getElementById('join');
-const nameInput = document.getElementById('name-input');
-const buzzerButton = document.getElementById('buzzer');
-const nameForm = document.getElementById('name-form');
-const buzzerContainer = document.getElementById('buzzer-container');
+@echo off
+rem -------------------------------------------------------
+rem  Stop the QuizNite servers started by Start-Server.bat
+rem -------------------------------------------------------
 
-const socket = new WebSocket('ws://192.168.0.67:2345');
+rem Attempt to close the Node.js WebSocket server
+echo Stopping Node.js server...
+taskkill /IM node.exe /F >nul 2>&1
 
-let userName = '';
+rem Attempt to close the Python HTTP server
+echo Stopping Python HTTP server...
+taskkill /IM python.exe /F >nul 2>&1
 
-socket.addEventListener('open', () => {
-    console.log('Participant: Connected to the server');
-});
-
-joinButton.addEventListener('click', () => {
-    userName = nameInput.value;
-    if (userName) {
-        socket.send(JSON.stringify({ type: 'join', user: userName }));
-        nameForm.style.display = 'none';
-        buzzerContainer.style.display = 'block';
-    }
-});
-
-buzzerButton.addEventListener('click', () => {
-    socket.send(JSON.stringify({ type: 'buzz', user: userName }));
-});
-
-socket.addEventListener('message', (event) => {
-    const data = JSON.parse(event.data);
-    console.log('Participant: Received message', data);
-    if (data.type === 'reset') {
-        buzzerButton.disabled = false;
-    }
-});
+echo All servers stopped.
