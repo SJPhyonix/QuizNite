@@ -7,7 +7,8 @@ const playerNameDisplay = document.getElementById('player-name');
 const buzzedMessage = document.getElementById('buzzed-message');
 const questionDiv = document.getElementById('question');
 
-const socket = new WebSocket('wss://quiznite.onrender.com'); // Ensure this URL is correct
+// Connect to the locally running WebSocket server
+const socket = new WebSocket('ws://localhost:3000');
 
 let userName = '';
 

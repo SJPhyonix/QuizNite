@@ -4,7 +4,8 @@ const playersList = document.getElementById('players-list');
 const questionInput = document.getElementById('question-input');
 const sendQuestionButton = document.getElementById('send-question');
 
-const socket = new WebSocket('wss://quiznite.onrender.com'); // Ensure this URL is correct
+// Connect to the locally running WebSocket server
+const socket = new WebSocket('ws://localhost:3000');
 
 socket.addEventListener('open', () => {
     console.log('Master: Connected to the server');
